@@ -20,7 +20,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.Transformation;
 
 /**
- * Created by tao.xu2 on 2017/6/13.
+ * Created by tory on 2017/6/13.
  */
 
 public class ElasticityViewHelper {

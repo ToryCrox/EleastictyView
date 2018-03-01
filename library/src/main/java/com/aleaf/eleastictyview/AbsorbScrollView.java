@@ -229,7 +229,7 @@ public class AbsorbScrollView extends ScrollView {
     /**
      * 松手后自动滑动到边缘时
      * 执行两次
-     * add by tao.xu2
+     * add by tory
      * @param velocityX
      */
     protected void absorbGlows(int velocityX, int velocityY) {

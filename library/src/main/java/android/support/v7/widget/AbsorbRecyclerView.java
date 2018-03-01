@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 /**
- * Created by tao.xu2 on 2017/6/14.
+ * Created by tory on 2017/6/14.
  */
 
 public class AbsorbRecyclerView extends RecyclerView {

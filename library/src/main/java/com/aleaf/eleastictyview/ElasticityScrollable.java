@@ -9,7 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by tao.xu2 on 2017/6/14.
+ * Created by tory on 2017/6/14.
  */
 
 public interface ElasticityScrollable {

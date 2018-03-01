@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by tao.xu2 on 2017/6/15.
+ * Created by tory on 2017/6/15.
  */
 
 public class ElasticityScrollView extends AbsorbScrollView implements ElasticityScrollable {

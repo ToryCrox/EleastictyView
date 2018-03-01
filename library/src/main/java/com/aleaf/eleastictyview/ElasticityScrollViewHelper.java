@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by tao.xu2 on 2017/6/15.
+ * Created by tory on 2017/6/15.
  */
 
 public class ElasticityScrollViewHelper extends ElasticityViewHelper {

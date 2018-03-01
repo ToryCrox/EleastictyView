@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 /**
- * Created by tao.xu2 on 2017/6/16.
+ * Created by tory on 2017/6/16.
  */
 
 public class ElasticityLinearLayout extends LinearLayout implements ElasticityScrollable {
