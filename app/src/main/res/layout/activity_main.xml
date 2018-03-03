@@ -14,11 +14,11 @@
         android:background="@color/colorAccent"
         android:gravity="center"
         android:padding="16dp">
-        <Button
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?android:attr/textColorPrimaryInverse"
-            android:text="外面是LinearLayout"/>
+            android:text="这是一个弹性控件，向下拉试试"/>
     </com.aleaf.eleastictyview.ElasticityLinearLayout>
 
 </FrameLayout>

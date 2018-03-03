@@ -45,7 +45,6 @@ public class ElasticityLinearLayout extends LinearLayout implements ElasticitySc
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent e) {
-        mElasticityViewHelper.logv("SpringLinearLayout onInterceptTouchEvent action="+e.getAction());
         if (mElasticityViewHelper.enableSpringEffectWhenDrag()
                 && mElasticityViewHelper.onInterceptTouchEvent(e)) {
             return true;
@@ -61,6 +60,12 @@ public class ElasticityLinearLayout extends LinearLayout implements ElasticitySc
             return true;
         }
         return super.onTouchEvent(e) ;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mElasticityViewHelper.onDetachedFromWindow();
     }
 
     @SuppressLint("MissingSuperCall")

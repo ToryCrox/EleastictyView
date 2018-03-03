@@ -8,22 +8,22 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by tory on 2017/6/15.
+ * description: 弹性ScrollView, 但实际上不继承ScrollView，在惯性滑动到边界时弹性幅度会根据实际速度
  */
 
-public class ElasticityScrollView extends AbsorbScrollView implements ElasticityScrollable {
+public class ElasticityNestScrollView extends AbsorbNestedScrollView implements ElasticityScrollable {
 
     protected ElasticityScrollViewHelper mElasticityViewHelper;
 
-    public ElasticityScrollView(Context context) {
+    public ElasticityNestScrollView(Context context) {
         this(context, null);
     }
 
-    public ElasticityScrollView(Context context, AttributeSet attrs) {
+    public ElasticityNestScrollView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ElasticityScrollView(Context context, AttributeSet attrs, int defStyle) {
+    public ElasticityNestScrollView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         mElasticityViewHelper = new ElasticityScrollViewHelper(this);
@@ -59,6 +59,7 @@ public class ElasticityScrollView extends AbsorbScrollView implements Elasticity
         super.absorbGlows(velocityX, velocityY);
         mElasticityViewHelper.absorbGlows(velocityX, velocityY);
     }
+
 
     @SuppressLint("MissingSuperCall")
     @Override

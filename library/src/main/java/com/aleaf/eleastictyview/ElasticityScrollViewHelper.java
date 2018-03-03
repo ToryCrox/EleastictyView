@@ -11,11 +11,8 @@ import android.view.View;
 
 public class ElasticityScrollViewHelper extends ElasticityViewHelper {
 
-    AbsorbScrollView mScrollView;
-
-    public ElasticityScrollViewHelper(@NonNull AbsorbScrollView view) {
+    public ElasticityScrollViewHelper(@NonNull View view) {
         super(view);
-        mScrollView = view;
     }
 
     @Override

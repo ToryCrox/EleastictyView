@@ -1,33 +1,43 @@
-/*Transsion Top Secret*/
 package com.aleaf.eleastictyview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 
 /**
- * Created by tory on 2017/6/15.
+ * @author tory
+ * @date 2018/3/3
  */
 
-public class ElasticityScrollView extends AbsorbScrollView implements ElasticityScrollable {
+public class ElasticityLinearFrameLayout extends FrameLayout implements ElasticityScrollable {
 
-    protected ElasticityScrollViewHelper mElasticityViewHelper;
+    protected ElasticityViewHelper mElasticityViewHelper;
 
-    public ElasticityScrollView(Context context) {
+    public ElasticityLinearFrameLayout(@NonNull Context context) {
         this(context, null);
     }
 
-    public ElasticityScrollView(Context context, AttributeSet attrs) {
+    public ElasticityLinearFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public ElasticityScrollView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public ElasticityLinearFrameLayout(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
 
-        mElasticityViewHelper = new ElasticityScrollViewHelper(this);
-        mElasticityViewHelper.init(attrs, defStyle);
+        mElasticityViewHelper = new ElasticityViewHelper(this);
+        mElasticityViewHelper.init(attrs, defStyleAttr);
+    }
+
+    public void setOrientation(@Orientation int orientation) {
+        if(mElasticityViewHelper != null){
+            mElasticityViewHelper.logv("ElasticityLinearFrameLayout setOrientation="+orientation);
+            mElasticityViewHelper.setOrientation(orientation);
+        }
     }
 
     @Override
@@ -42,22 +52,11 @@ public class ElasticityScrollView extends AbsorbScrollView implements Elasticity
     @Override
     public boolean onTouchEvent(MotionEvent e) {
         if (mElasticityViewHelper.enableSpringEffectWhenDrag()) {
+            //在支持弹性的时候需要返回true，否则无法拦截到事件
             mElasticityViewHelper.onTouchEvent(e);
             return true;
         }
         return super.onTouchEvent(e) ;
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        mElasticityViewHelper.onDetachedFromWindow();
-    }
-
-    @Override
-    public void absorbGlows(int velocityX, int velocityY){
-        super.absorbGlows(velocityX, velocityY);
-        mElasticityViewHelper.absorbGlows(velocityX, velocityY);
     }
 
     @SuppressLint("MissingSuperCall")
@@ -68,7 +67,7 @@ public class ElasticityScrollView extends AbsorbScrollView implements Elasticity
 
     @Override
     public boolean isBeingDragged() {
-        return mIsBeingDragged;
+        return false;
     }
 
     @Override

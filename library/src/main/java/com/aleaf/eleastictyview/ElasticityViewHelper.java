@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -31,7 +32,8 @@ public class ElasticityViewHelper {
     protected static final int HORIZONTAL = ElasticityScrollable.HORIZONTAL;
     protected static final int VERTICAL = ElasticityScrollable.VERTICAL;
 
-    protected static final float DEFAULT_MAX_SCALE = 1.10f;
+    protected static final int DEFAULT_MAX_OFFSET = 300;
+    protected static final float DEFAULT_MAX_SCALE = 1.20f;
 
     protected static final int STATE_NORMAL = 0;
     protected static final int STATE_DRAG_TOP_OR_LEFT = 1;
@@ -51,7 +53,13 @@ public class ElasticityViewHelper {
     protected int mMaximumVelocity;
     protected int mOrientation; // horizontal or vertical
     protected float mLastMotionPos; // x-coordinate or y-coordinate of last event, base on mOrientation
+    /**
+     * 滑动的最大距离，默认为{@link #DEFAULT_MAX_OFFSET}
+     */
     protected int mMaxOverScrollOffset;
+    /**
+     * 弹性幅度，默认为{@link #DEFAULT_MAX_SCALE}, 必需大于1
+     */
     protected float mMaxOverScrollScale;
     protected float mFrom;
     protected float mOffset;
@@ -65,11 +73,11 @@ public class ElasticityViewHelper {
     private Interpolator releaseBackAnimInterpolator;
     private Interpolator flingBackAnimInterpolator;
 
-    protected ViewGroup mView;
+    protected View mView;
     protected ElasticityScrollable mSpringView;
 
 
-    public ElasticityViewHelper(@NonNull ViewGroup view) {
+    public ElasticityViewHelper(@NonNull View view) {
         mView = view;
         if(!(view instanceof ElasticityScrollable)){
             throw new RuntimeException("ElasticityViewHelper init view must implement ElasticityScrollable");
@@ -77,9 +85,11 @@ public class ElasticityViewHelper {
         mSpringView = (ElasticityScrollable) view;
     }
 
-    protected void init(AttributeSet attrs, int defStyleAttr) {
+    protected void init(@NonNull AttributeSet attrs, int defStyleAttr) {
         mView.setWillNotDraw(false);
-        mView.setClipToPadding(false);
+        if(mView instanceof ViewGroup){
+           ((ViewGroup)mView).setClipToPadding(false);
+        }
 
         Context context = mView.getContext();
         ViewConfiguration vc = ViewConfiguration.get(context);
@@ -87,7 +97,7 @@ public class ElasticityViewHelper {
         mMaximumVelocity = vc.getScaledMaximumFlingVelocity();
 
 
-        mMaxOverScrollOffset = dp2px(context, 300);
+        mMaxOverScrollOffset = dp2px(context, DEFAULT_MAX_OFFSET);
         mMaxOverScrollScale = DEFAULT_MAX_SCALE;
         mOrientation = VERTICAL;
         mReleaseBackAnimDuration = DEF_RELEASE_BACK_ANIM_DURATION;
