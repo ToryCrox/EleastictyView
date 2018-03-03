@@ -8,9 +8,27 @@
     tools:context="com.aleaf.elasticityviewdemo.MainActivity">
 
     <com.aleaf.eleastictyview.ElasticityLinearLayout
+        android:id="@+id/vertical_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:orientation="vertical"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="?android:attr/textColorPrimaryInverse"
+            android:text="这是一个弹性竖直的LeanerLayout，向下拉试试"/>
+    </com.aleaf.eleastictyview.ElasticityLinearLayout>
+
+    <com.aleaf.eleastictyview.ElasticityLinearLayout
+        android:id="@+id/horizontal_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="horizontal"
+        android:visibility="gone"
         android:background="@color/colorAccent"
         android:gravity="center"
         android:padding="16dp">
@@ -18,7 +36,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="?android:attr/textColorPrimaryInverse"
-            android:text="这是一个弹性控件，向下拉试试"/>
+            android:text="这是一个弹性横向的LeanerLayout，左右拉试试"/>
     </com.aleaf.eleastictyview.ElasticityLinearLayout>
+
+    <com.aleaf.eleastictyview.ElasticityRecyclerView
+        android:id="@+id/recycler_view"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.aleaf.eleastictyview.ElasticityScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_long"/>
+    </com.aleaf.eleastictyview.ElasticityScrollView>
 
 </FrameLayout>

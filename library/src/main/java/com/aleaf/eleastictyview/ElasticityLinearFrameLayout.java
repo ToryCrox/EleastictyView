@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
  * @author tory
  * @date 2018/3/3
  */
-
 public class ElasticityLinearFrameLayout extends FrameLayout implements ElasticityScrollable {
 
     protected ElasticityViewHelper mElasticityViewHelper;

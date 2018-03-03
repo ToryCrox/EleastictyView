@@ -53,8 +53,8 @@ public class ElasticityRecyclerView extends AbsorbRecyclerView implements Elasti
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (mElasticityViewHelper.enableSpringEffectWhenDrag()) {
-            mElasticityViewHelper.onTouchEvent(e);
+        if (mElasticityViewHelper.enableSpringEffectWhenDrag()
+                && mElasticityViewHelper.onTouchEvent(e)) {
             return true;
         }
         return super.onTouchEvent(e) ;

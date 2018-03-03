@@ -41,8 +41,8 @@ public class ElasticityScrollView extends AbsorbScrollView implements Elasticity
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (mElasticityViewHelper.enableSpringEffectWhenDrag()) {
-            mElasticityViewHelper.onTouchEvent(e);
+        if (mElasticityViewHelper.enableSpringEffectWhenDrag()
+                && mElasticityViewHelper.onTouchEvent(e)) {
             return true;
         }
         return super.onTouchEvent(e) ;

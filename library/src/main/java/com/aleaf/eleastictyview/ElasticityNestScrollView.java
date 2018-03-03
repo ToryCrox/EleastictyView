@@ -41,8 +41,8 @@ public class ElasticityNestScrollView extends AbsorbNestedScrollView implements 
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-        if (mElasticityViewHelper.enableSpringEffectWhenDrag()) {
-            mElasticityViewHelper.onTouchEvent(e);
+        if (mElasticityViewHelper.enableSpringEffectWhenDrag()
+                && mElasticityViewHelper.onTouchEvent(e)) {
             return true;
         }
         return super.onTouchEvent(e) ;

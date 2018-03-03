@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 /**
  * Created by tory on 2017/6/16.
  */
-
 public class ElasticityLinearLayout extends LinearLayout implements ElasticityScrollable {
 
     protected ElasticityViewHelper mElasticityViewHelper;
