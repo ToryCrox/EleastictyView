@@ -1,4 +1,3 @@
-/*Transsion Top Secret*/
 package android.support.v7.widget;
 
 import android.content.Context;

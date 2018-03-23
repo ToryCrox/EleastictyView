@@ -1,23 +1,23 @@
 apply plugin: 'com.android.application'
 
-def config = rootProject.ext.android
+def configs = rootProject.ext.android
 def librarys = rootProject.ext.dependences
 
 android {
-    compileSdkVersion config.compileSdkVersion
-    buildToolsVersion config.buildToolsVersion
+    compileSdkVersion configs.compileSdkVersion
+    buildToolsVersion configs.buildToolsVersion
 
     defaultConfig {
         applicationId "com.aleaf.elasticityviewdemo"
-        minSdkVersion config.miniSdkVersion
-        targetSdkVersion config.targetSdkVersion
+        minSdkVersion configs.miniSdkVersion
+        targetSdkVersion configs.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -28,7 +28,7 @@ dependencies {
     implementation librarys.appcompat
     implementation librarys.recyclerview
 
-    compile librarys.butterknife
+    implementation librarys.butterknife
     annotationProcessor librarys.butterknifeCompiler
 
     testImplementation 'junit:junit:4.12'
@@ -36,3 +36,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':library')
 }
+
+apply from: "copyApk.gradle"

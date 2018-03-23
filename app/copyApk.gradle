@@ -1,0 +1,55 @@
+
+def outputPath = "./outApk/"
+def outApkDir = file(outputPath)
+if(!outApkDir.exists()) outApkDir.mkdir()
+
+import java.text.SimpleDateFormat
+
+
+/**
+ * 获取Git 分支名
+ */
+def getGitBranch() {
+    try {
+        return 'git symbolic-ref --short -q HEAD'.execute().text.trim()
+    } catch (Exception e) {
+        return ''
+    }
+}
+
+/**
+ *组合最终需要的apk名称
+ *若要定制最终输出的文件名，请修改该方法
+ */
+def getTargetApkName(){
+    SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss")
+    def prefx = rootProject.name
+    def today = format.format(new Date())
+    def versionName = android.defaultConfig.versionName
+    return "${prefx}_${getGitBranch()}_v${versionName}_${today}"
+}
+project.afterEvaluate {
+    def relaseTask = "assembleRelease"
+    //assembleReleass任务后添加拷贝命令
+    if(tasks.findByName(relaseTask) != null){
+        tasks.getByName(relaseTask) {
+            it.doLast {
+                println "$project.name: After assembleRelease, copy "
+                def apkName = getTargetApkName()
+                println "${apkName}"
+                copy{//拷贝apk
+                    from "/build/outputs/apk/release"
+                    into outputPath
+                    include "app-release-unsigned.apk"
+                    rename("app-release-unsigned.apk", "${apkName}.apk")
+                }
+                copy{//拷贝maping文件
+                    from "/build/outputs/mapping/release"
+                    into outputPath
+                    include "mapping.txt"
+                    rename("mapping.txt", "${apkName}_mapping.txt")
+                }
+            }
+        }
+    }
+}

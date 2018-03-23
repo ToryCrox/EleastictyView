@@ -1,4 +1,3 @@
-/*Transsion Top Secret*/
 package com.aleaf.eleastictyview;
 
 import android.content.Context;
