@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ElasticityView">
+        <attr name="ev_enable_spring_effect_when_drag" format="boolean"/>
+        <attr name="ev_enable_spring_effect_when_fling" format="boolean"/>
+        <attr name="ev_orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+    </declare-styleable>
+</resources>

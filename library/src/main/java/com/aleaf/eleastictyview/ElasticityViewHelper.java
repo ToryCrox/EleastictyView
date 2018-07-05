@@ -1,6 +1,7 @@
 package com.aleaf.eleastictyview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.support.annotation.FloatRange;
 import android.support.annotation.NonNull;
@@ -50,7 +51,7 @@ public class ElasticityViewHelper {
 
     protected int mTouchSlop;
     protected int mMaximumVelocity;
-    protected int mOrientation; // horizontal or vertical
+    protected int mOrientation = VERTICAL; // horizontal or vertical
     protected float mLastMotionPos; // x-coordinate or y-coordinate of last event, base on mOrientation
     /**
      * 滑动的最大距离，默认为{@link #DEFAULT_MAX_OFFSET}
@@ -64,8 +65,8 @@ public class ElasticityViewHelper {
     protected float mOffset;
     protected int mActivePointerId = INVALID_POINTER;
 
-    protected boolean mEnableSpringEffectWhenDrag;
-    protected boolean mEnableSpringEffectWhenFling;
+    protected boolean mEnableSpringEffectWhenDrag = true;
+    protected boolean mEnableSpringEffectWhenFling = true;
 
     private Interpolator mSpringScaleInterpolator;
     private Animation springAnimation;
@@ -85,8 +86,10 @@ public class ElasticityViewHelper {
     }
 
     protected void init(@NonNull AttributeSet attrs, int defStyleAttr) {
+        //必需设置这个，否则显示不会调用draw方法
         mView.setWillNotDraw(false);
         if(mView instanceof ViewGroup){
+            //设置这个是为了在Padding内也可以显示View
            ((ViewGroup)mView).setClipToPadding(false);
         }
 
@@ -98,11 +101,15 @@ public class ElasticityViewHelper {
 
         mMaxOverScrollOffset = dp2px(context, DEFAULT_MAX_OFFSET);
         mMaxOverScrollScale = DEFAULT_MAX_SCALE;
-        mOrientation = VERTICAL;
         mReleaseBackAnimDuration = DEF_RELEASE_BACK_ANIM_DURATION;
         mFlingBackAnimDuration =  DEF_FLING_BACK_ANIM_DURATION;
-        mEnableSpringEffectWhenDrag = true;
-        mEnableSpringEffectWhenFling = true;
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ElasticityView);
+        mOrientation = a.getInt(R.styleable.ElasticityView_ev_orientation, mOrientation);
+        mEnableSpringEffectWhenDrag = a.getBoolean(
+                R.styleable.ElasticityView_ev_enable_spring_effect_when_drag, mEnableSpringEffectWhenFling);
+        mEnableSpringEffectWhenFling = a.getBoolean(
+                R.styleable.ElasticityView_ev_enable_spring_effect_when_fling, mEnableSpringEffectWhenFling);
+        a.recycle();
 
         initAnimation();
         if (ENABLE_LOG_V){
