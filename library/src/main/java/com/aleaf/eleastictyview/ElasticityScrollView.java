@@ -48,6 +48,12 @@ public class ElasticityScrollView extends AbsorbScrollView implements Elasticity
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mElasticityViewHelper.onSizeChanged();
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         mElasticityViewHelper.onDetachedFromWindow();

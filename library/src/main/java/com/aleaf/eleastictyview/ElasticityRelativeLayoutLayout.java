@@ -65,6 +65,12 @@ public class ElasticityRelativeLayoutLayout extends RelativeLayout implements El
         mElasticityViewHelper.onDetachedFromWindow();
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mElasticityViewHelper.onSizeChanged();
+    }
+
     @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {

@@ -56,7 +56,13 @@ public class ElasticityRecyclerView extends AbsorbRecyclerView implements Elasti
                 && mElasticityViewHelper.onTouchEvent(e)) {
             return true;
         }
-        return super.onTouchEvent(e) ;
+        return super.onTouchEvent(e);
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mElasticityViewHelper.onSizeChanged();
     }
 
     @SuppressLint("MissingSuperCall")
@@ -66,7 +72,7 @@ public class ElasticityRecyclerView extends AbsorbRecyclerView implements Elasti
     }
 
     @Override
-    public void absorbGlows(int velocityX, int velocityY){
+    public void absorbGlows(int velocityX, int velocityY) {
         mElasticityViewHelper.absorbGlows(velocityX, velocityY);
     }
 

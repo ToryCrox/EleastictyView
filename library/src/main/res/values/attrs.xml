@@ -4,6 +4,9 @@
     <declare-styleable name="ElasticityView">
         <attr name="ev_enable_spring_effect_when_drag" format="boolean"/>
         <attr name="ev_enable_spring_effect_when_fling" format="boolean"/>
+        <attr name="ev_max_over_scroll_offset" format="dimension"/>
+        <attr name="ev_max_over_scroll_offset_ratio" format="float"/>
+        <attr name="ev_max_over_scroll_scale" format="float"/>
         <attr name="ev_orientation" format="enum">
             <enum name="horizontal" value="0" />
             <enum name="vertical" value="1" />

@@ -54,6 +54,12 @@ public class ElasticityNestScrollView extends AbsorbNestedScrollView implements 
     }
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mElasticityViewHelper.onSizeChanged();
+    }
+
+    @Override
     public void absorbGlows(int velocityX, int velocityY){
         super.absorbGlows(velocityX, velocityY);
         mElasticityViewHelper.absorbGlows(velocityX, velocityY);

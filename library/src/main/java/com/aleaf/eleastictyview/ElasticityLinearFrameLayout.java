@@ -58,6 +58,18 @@ public class ElasticityLinearFrameLayout extends FrameLayout implements Elastici
         return super.onTouchEvent(e) ;
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mElasticityViewHelper.onSizeChanged();
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mElasticityViewHelper.onDetachedFromWindow();
+    }
+
     @SuppressLint("MissingSuperCall")
     @Override
     public void draw(Canvas canvas) {

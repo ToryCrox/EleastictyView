@@ -43,17 +43,20 @@
         android:id="@+id/recycler_view"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        app:ev_max_over_scroll_scale = "1.15"
+        app:ev_max_over_scroll_offset_ratio="0.90"/>
 
     <com.aleaf.eleastictyview.ElasticityScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:ev_max_over_scroll_offset_ratio="0.90"
         android:scrollbars="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/text_long"/>
+            android:text="@string/text_long" />
     </com.aleaf.eleastictyview.ElasticityScrollView>
 
 </FrameLayout>

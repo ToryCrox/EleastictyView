@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -33,7 +34,7 @@ public class ElasticityViewHelper {
     protected static final int VERTICAL = ElasticityScrollable.VERTICAL;
 
     protected static final int DEFAULT_MAX_OFFSET = 300;
-    protected static final float DEFAULT_MAX_SCALE = 1.20f;
+    protected static final float DEFAULT_MAX_SCALE = 1.15f;
 
     protected static final int STATE_NORMAL = 0;
     protected static final int STATE_DRAG_TOP_OR_LEFT = 1;
@@ -57,6 +58,10 @@ public class ElasticityViewHelper {
      * 滑动的最大距离，默认为{@link #DEFAULT_MAX_OFFSET}
      */
     protected int mMaxOverScrollOffset;
+    /**
+     * 滑动最大距离的比例
+     */
+    protected float mMaxOverScrollOffsetRatio;
     /**
      * 弹性幅度，默认为{@link #DEFAULT_MAX_SCALE}, 必需大于1
      */
@@ -98,9 +103,6 @@ public class ElasticityViewHelper {
         mTouchSlop = vc.getScaledTouchSlop();
         mMaximumVelocity = vc.getScaledMaximumFlingVelocity();
 
-
-        mMaxOverScrollOffset = dp2px(context, DEFAULT_MAX_OFFSET);
-        mMaxOverScrollScale = DEFAULT_MAX_SCALE;
         mReleaseBackAnimDuration = DEF_RELEASE_BACK_ANIM_DURATION;
         mFlingBackAnimDuration =  DEF_FLING_BACK_ANIM_DURATION;
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ElasticityView);
@@ -109,6 +111,12 @@ public class ElasticityViewHelper {
                 R.styleable.ElasticityView_ev_enable_spring_effect_when_drag, mEnableSpringEffectWhenFling);
         mEnableSpringEffectWhenFling = a.getBoolean(
                 R.styleable.ElasticityView_ev_enable_spring_effect_when_fling, mEnableSpringEffectWhenFling);
+        mMaxOverScrollOffset = a.getDimensionPixelOffset(
+                R.styleable.ElasticityView_ev_max_over_scroll_offset, dp2px(context, DEFAULT_MAX_OFFSET));
+        mMaxOverScrollOffsetRatio = a.getFloat(
+                R.styleable.ElasticityView_ev_max_over_scroll_offset_ratio, 0f);
+        mMaxOverScrollScale = a.getFloat(
+                R.styleable.ElasticityView_ev_max_over_scroll_scale, DEFAULT_MAX_SCALE);
         a.recycle();
 
         initAnimation();
@@ -189,6 +197,22 @@ public class ElasticityViewHelper {
 
     public boolean enableSpringEffectWhenDrag(){
         return mEnableSpringEffectWhenDrag;
+    }
+
+
+    protected void mayUpdateMaxOverScrollOffset(){
+        if(mMaxOverScrollOffsetRatio > 0){
+            mMaxOverScrollOffset = (int) ((mOrientation == HORIZONTAL ?  getWidth() : getHeight())
+                    * mMaxOverScrollOffsetRatio);
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void onSizeChanged() {
+        mayUpdateMaxOverScrollOffset();
     }
 
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -569,8 +593,8 @@ public class ElasticityViewHelper {
 
             // scale the canvas
             final float factor = Math.abs(mOffset) / (float) mMaxOverScrollOffset;
-            final float fixFactor = /*isDragged() ? mSpringScaleInterpolator.getInterpolation(factor) :*/
-                                    factor;
+            final float fixFactor = mSpringScaleInterpolator != null ?
+                    mSpringScaleInterpolator.getInterpolation(factor) : factor;
             final float scale = 1 +  fixFactor * (mMaxOverScrollScale - 1);
             if (mOrientation == VERTICAL) {
                 final int viewHeight = getHeight();
