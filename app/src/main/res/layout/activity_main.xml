@@ -10,7 +10,7 @@
     <com.aleaf.eleastictyview.ElasticityLinearLayout
         android:id="@+id/vertical_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/colorAccent"
         android:gravity="center"
@@ -43,9 +43,7 @@
         android:id="@+id/recycler_view"
         android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ev_max_over_scroll_scale = "1.15"
-        app:ev_max_over_scroll_offset_ratio="0.90"/>
+        android:layout_height="match_parent" />
 
     <com.aleaf.eleastictyview.ElasticityScrollView
         android:id="@+id/scroll_view"

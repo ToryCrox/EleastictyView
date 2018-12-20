@@ -19,6 +19,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.view.animation.OvershootInterpolator;
 import android.view.animation.Transformation;
 
 /**
@@ -34,7 +35,7 @@ public class ElasticityViewHelper {
     protected static final int VERTICAL = ElasticityScrollable.VERTICAL;
 
     protected static final int DEFAULT_MAX_OFFSET = 300;
-    protected static final float DEFAULT_MAX_SCALE = 1.15f;
+    protected static final float DEFAULT_MAX_SCALE = 1.10f;
 
     protected static final int STATE_NORMAL = 0;
     protected static final int STATE_DRAG_TOP_OR_LEFT = 1;
@@ -114,7 +115,7 @@ public class ElasticityViewHelper {
         mMaxOverScrollOffset = a.getDimensionPixelOffset(
                 R.styleable.ElasticityView_ev_max_over_scroll_offset, dp2px(context, DEFAULT_MAX_OFFSET));
         mMaxOverScrollOffsetRatio = a.getFloat(
-                R.styleable.ElasticityView_ev_max_over_scroll_offset_ratio, 0f);
+                R.styleable.ElasticityView_ev_max_over_scroll_offset_ratio, 1f);
         mMaxOverScrollScale = a.getFloat(
                 R.styleable.ElasticityView_ev_max_over_scroll_scale, DEFAULT_MAX_SCALE);
         a.recycle();
