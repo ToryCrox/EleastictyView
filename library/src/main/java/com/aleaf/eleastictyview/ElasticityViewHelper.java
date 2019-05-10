@@ -29,7 +29,7 @@ import android.view.animation.Transformation;
 public class ElasticityViewHelper {
 
     private static final String TAG = "ElasticityViewHelper";
-    private static final boolean ENABLE_LOG_V = true;
+    private static final boolean ENABLE_LOG_V = false;
 
     protected static final int HORIZONTAL = ElasticityScrollable.HORIZONTAL;
     protected static final int VERTICAL = ElasticityScrollable.VERTICAL;
