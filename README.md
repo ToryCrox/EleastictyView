@@ -9,6 +9,6 @@ maven { url 'https://jitpack.io' }
 
 
 dependencies {
-      implementation 'com.github.ToryCrox:EleastictyView:1.0.0'
+      implementation 'com.github.ToryCrox:EleastictyView:1.0.2'
 }
 ```
